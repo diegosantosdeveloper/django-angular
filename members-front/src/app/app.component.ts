@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from './api.service';
 
 @Component({
@@ -10,12 +11,12 @@ export class AppComponent {
   title = 'members-front';
 
   members = [
-    {name: 'Member 01', id: 1, surname: 'Sales', photo: 'http://www.minhapp.com/photo01'}, 
-    {name: 'Member 02', id: 2, surname: 'Fitzgerald', photo: 'http://www.minhapp.com/photo02'},
-    {name: 'Member 03', id: 3, surname: 'Alonso', photo: 'http://www.minhapp.com/photo02'}
+    {name: 'Member 01', id: 1, surname: 'Sales', phone: 'http://www.minhapp.com/photo01'}, 
+    {name: 'Member 02', id: 2, surname: 'Fitzgerald', phone: 'http://www.minhapp.com/photo02'},
+    {name: 'Member 03', id: 3, surname: 'Alonso', phone: 'http://www.minhapp.com/photo02'}
   ]
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private router: Router) {
     this.getMembers();
   }
 
@@ -27,8 +28,6 @@ export class AppComponent {
   }
 
   memberClicked = (member:any) => {
-    this.api.getMember(member.id).subscribe({
-      next: (data) => console.log(data)
-    });
+    this.router.navigate(['member-detail', member.id]);
   }
 }
